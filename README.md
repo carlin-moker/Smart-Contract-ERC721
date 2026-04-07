@@ -1,37 +1,21 @@
-// SPDX-License-Identifier: MIT
-pragma solidity ^0.8.20;
+# 🌌 Protección del Magnate - Cosmicjuan.blockchain
+# Ignorar archivos de entorno con llaves privadas
+.env
+.env.local
+.env.*.local
 
-import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
-import "@openzeppelin/contracts/access/Ownable.sol";
+# Ignorar llaves de seguridad y certificados
+*.pem
+*.key
+*.cert
 
-contract CosmicJuanNFT is ERC721URIStorage, Ownable {
-    uint256 private _nextTokenId;
+# Ignorar dependencias de Node
+node_modules/
+npm-debug.log*
+yarn-error.log*
 
-    constructor() ERC721("CosmicJuan", "CJ") Ownable(msg.sender) {}
-
-    function safeMint(address to, string memory uri) public onlyOwner {
-        uint256 tokenId = _nextTokenId++;
-        _safeMint(to, tokenId);
-        _setTokenURI(tokenId, uri);
-    }
-
-    // The following functions are overrides required by Solidity.
-
-    function tokenURI(uint256 tokenId)
-        public
-        view
-        override(ERC721URIStorage)
-        returns (string memory)
-    {
-        return super.tokenURI(tokenId);
-    }
-
-    function supportsInterface(bytes4 interfaceId)
-        public
-        view
-        override(ERC721URIStorage)
-        returns (bool)
-    {
-        return super.supportsInterface(interfaceId);
-    }
-}
+# Archivos de sistema y carpetas de compilación
+.DS_Store
+dist/
+build/
+out/
