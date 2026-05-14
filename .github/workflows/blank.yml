@@ -2,17 +2,17 @@ name: Nucleo-Cosmicjuan-CI
 
 on:
   push:
-    branches: [ "main", "carlin-moker-patch" ]
+    branches: [ "main", "parche-fumador-carlin-1" ]
   pull_request:
     branches: [ "main" ]
-  workflow_dispatch: # Activación manual: El poder del operador
+  workflow_dispatch: # Activación manual habilitada
 
 permissions:
   contents: write
   packages: write
 
 jobs:
-  soberania:
+  construccion:
     runs-on: ubuntu-latest
     steps:
       - name: Sincronizacion de ADN Digital
@@ -29,5 +29,5 @@ jobs:
       - name: Simulacion de Carga Termux/Node
         run: |
           echo "Ejecutando lógica constructiva de carlin-moker..."
-          # Aquí es donde el código evoluciona según tus necesidades reales
           node --version
+          echo "Sinergia Neuronal completada."
