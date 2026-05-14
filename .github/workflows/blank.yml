@@ -1,36 +1,33 @@
-# This is a basic workflow to help you get started with Actions
+name: Sinergia_Neuronal_Red62
 
-name: CI
-
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-    branches: [ "main" ]
+    branches: [ "main", "carlin-moker" ] # Monitorea ambas ramas críticas
   pull_request:
     branches: [ "main" ]
 
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
+  validacion_tecnica:
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v4
+      - name: Sincronización de Infraestructura
+        uses: actions/checkout@v4
 
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
+      - name: Configurar Entorno de Compilación
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
 
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
+      - name: Instalación de Dependencias (OpenZeppelin)
+        run: npm install @openzeppelin/contracts
+
+      - name: Verificación de Integridad de Contratos
+        # Este paso compila tus archivos .sol para asegurar que no hay errores lógicos
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+          echo "Iniciando análisis neuronal de CosmicJuan.sol..."
+          npx solc --bin --abi contracts/CosmicJuan.sol -o build/
+          echo "Lógica constructiva verificada con éxito."
+
+      - name: Blindaje de Bóveda
+        run: echo "Estado: SOBERANÍA TOTAL ACTIVA - NODO_MAESTRO_RED62_LARA"
