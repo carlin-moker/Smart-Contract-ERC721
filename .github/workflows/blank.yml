@@ -5,7 +5,7 @@ on:
     branches: [ "main", "parche-fumador-carlin-1" ]
   pull_request:
     branches: [ "main" ]
-  workflow_dispatch: # Activación manual habilitada
+  workflow_dispatch: 
 
 permissions:
   contents: write
@@ -22,12 +22,12 @@ jobs:
 
       - name: Validacion Criptofisicomatematica
         run: |
-          echo "Iniciando secuencia de protección divina..."
+          echo "Iniciando secuencia de proteccion divina..."
           echo "Verificando Red 62 - Estado: CONECTADO"
-          echo "Protocolo Stealth Deployment: STANDBY"
+          echo "Despliegue sigiloso de protocolo: EN ESPERA"
           
       - name: Simulacion de Carga Termux/Node
         run: |
-          echo "Ejecutando lógica constructiva de carlin-moker..."
+          echo "Ejecutando logica constructiva de carlin-moker..."
           node --version
           echo "Sinergia Neuronal completada."
