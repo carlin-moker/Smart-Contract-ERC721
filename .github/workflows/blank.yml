@@ -1,33 +1,48 @@
-name: Nucleo-Cosmicjuan-CI
+name: Sinergia Divine Operative CI
 
 on:
   push:
-    branches: [ "main", "parche-fumador-carlin-1" ]
+    branches: [ carlin-moker ]
   pull_request:
-    branches: [ "main" ]
-  workflow_dispatch: 
-
-permissions:
-  contents: write
-  packages: write
+    branches: [ carlin-moker ]
 
 jobs:
-  construccion:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Sincronizacion de ADN Digital
-        uses: actions/checkout@v4
-        with:
-          submodules: recursive
+      - name: Checkout repo
+        uses: actions/checkout@v3
 
-      - name: Validacion Criptofisicomatematica
-        run: |
-          echo "Iniciando secuencia de proteccion divina..."
-          echo "Verificando Red 62 - Estado: CONECTADO"
-          echo "Despliegue sigiloso de protocolo: EN ESPERA"
-          
-      - name: Simulacion de Carga Termux/Node
-        run: |
-          echo "Ejecutando logica constructiva de carlin-moker..."
-          node --version
-          echo "Sinergia Neuronal completada."
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Compile contracts
+        run: npx hardhat compile
+
+      - name: Run tests
+        run: npx hardhat test
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Deploy to Red-62
+        env:
+          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+        run: npx hardhat run scripts/deploy.js --network red62
