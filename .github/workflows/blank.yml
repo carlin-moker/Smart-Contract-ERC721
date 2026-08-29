@@ -15,6 +15,14 @@ jobs:
       - name: Checkout del Repositorio
         uses: actions/checkout@v4
 
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Instalar Dependencias
+        run: npm install
+
       - name: Ejecutar Script de Inicio
         run: echo "Iniciando núcleo técnico de Cosmicjuan.blockchain..."
 
@@ -23,3 +31,15 @@ jobs:
           echo "Estado: OPERATIVO"
           echo "Operador: carlin-moker"
           echo "Desplegando en Red 62 e infraestructura independiente."
+
+      - name: Ejecutar Pruebas
+        run: npm test
+
+      - name: Build Soberano
+        run: npm run build
+
+      - name: Despliegue Automático
+        if: github.ref == 'refs/heads/main'
+        run: |
+          echo "Desplegando Cosmicjuan.blockchain en Red-62..."
+          bash scripts/despliegue_soberano.sh
